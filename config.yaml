@@ -1,0 +1,65 @@
+#CONFIG
+# ¿ Qué se puede modificar de la aplicación en este archivo ?
+# - La columna del CSV corresponde a qué "rol" semántico (ej. title, doi, author_ids).
+# - Los tipos RDF se asignan a entidades (schema:ScholarlyArticle, etc.).
+# - Los prefijos y namespaces usados.
+
+# -----------------------------------------------------------------------------
+# CONFIGURATION FOR RDF GRAPH GENERATION (v3 - with list support)
+# -----------------------------------------------------------------------------
+
+namespaces:
+  defs: "http://deflores.org/utpl/vocab/"
+  schema: "https://schema.org/"
+  dct: "http://purl.org/dc/terms/"
+  skos: "http://www.w3.org/2004/02/skos/core#"
+  rdfs: "http://www.w3.org/2000/01/rdf-schema#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+
+base_uri: "http://deflores.org/utpl/vocab/"
+
+settings:
+  inspection_date: "today"
+  output_format: "ttl"
+
+# MODIFIED: Entity types now support lists for multiple rdf:type declarations.
+entity_types:
+  # List for the default types
+  scholarly_article:
+    - "schema:ScholarlyArticle"
+  author: "schema:Person"
+  keyword: "skos:Concept"
+  funding_organization: "schema:Organization"
+  citation_observation: "schema:Observation"
+  publication_types:
+    conference: "defs:ConferenceProceedings"
+    journal: "defs:AcademicJournal"
+    book_series: "defs:BookSeries"
+    repository: "defs:DigitalRepository"
+
+# NEW: A dedicated section for keyword processing to allow multiple source columns.
+keyword_settings:
+  columns:
+    - "Author Keywords"
+    - "Index Keywords"
+
+# Mapeos de columnas del csv a modelo RDF.
+# En la izquierda están los nombres de las variables
+# En la derecha están los nombres de las columnas del CSV.
+column_mappings:
+  main_entity_identifier: "EID"
+  title: "Title"
+  year: "Year"
+  doi: "DOI"
+  link: "Link"
+  abstract: "Abstract"
+  author_ids: "Author(s) ID"
+  author_full_names: "Author full names"
+  author_abbreviations: "Authors"
+  source_title: "Source title"
+  volume: "Volume"
+  issue: "Issue"
+  page_start: "Page start"
+  page_end: "Page end"
+  funding_details: "Funding Details"
+  cited_by: "Cited by"
